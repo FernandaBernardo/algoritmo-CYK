@@ -12,6 +12,7 @@ public class glc {
 		File glc = new File("src/files/inp-glc.txt");
 		File cadeias = new File("src/files/inp-cadeias.txt");
 		leitura = new Leitura(glc, cadeias);
+		tabelas = new Tabela[leitura.getCadeias().length];
 		criarTabelas();
 		for(int i = 0; i<tabelas.length; i++) cyk(tabelas[i]);
 	}
@@ -35,12 +36,12 @@ public class glc {
 			if (variavel != null) tabela.tabela[i][i] = variavel;
 		}
 		
-		for (int l = 2; l < n; l++) {
-			for (int i = 1; i < n-l+1; i++) {
-				int j = i + l - 1;
-				for (int k = i; k < j-1; k++) {
-					String variavel = verificaSubcadeia(tabela, i, j, k);
-					if(variavel != null) tabela.tabela[i][j] = variavel;
+		for (int tamanhoSubcadeia = 2; tamanhoSubcadeia < n; tamanhoSubcadeia++) {
+			for (int posInicial = 1; posInicial < n-tamanhoSubcadeia+1; posInicial++) {
+				int posFinal = posInicial + tamanhoSubcadeia - 1;
+				for (int posDivisao = posInicial; posDivisao < posFinal-1; posDivisao++) {
+					String variavel = verificaSubcadeia(tabela, posInicial, posFinal, posDivisao);
+					if(variavel != null) tabela.tabela[posInicial][posFinal] = variavel;
 				}
 			}
 		}
@@ -56,7 +57,7 @@ public class glc {
 		return null;
 	}
 
-	public static String verificaSubcadeia(Tabela tabela, int i, int j, int k) {
+	public static String verificaSubcadeia(Tabela tabela, int posInicial, int posFinal, int posDivisao) {
 
 		return null;
 	}
