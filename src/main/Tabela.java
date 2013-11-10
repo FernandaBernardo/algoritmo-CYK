@@ -30,5 +30,4 @@ public class Tabela {
 			System.out.println();
 		}
 	}
-	
 }

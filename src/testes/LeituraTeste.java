@@ -41,10 +41,12 @@ public class LeituraTeste {
 	
 	@Test
 	public void verificando_regras() {
-		String[] regras = leitura.getRegras();
-		Assert.assertEquals(regras[0], "S0 > &");
-		Assert.assertEquals(regras[1], "S0 > A T");
-		Assert.assertEquals(regras[regras.length-1], "B > b");
+		String[][] regras = leitura.getRegras();
+		Assert.assertEquals(regras[0][0], "S0");
+		Assert.assertEquals(regras[0][1], ">");
+		Assert.assertEquals(regras[0][2], "&");
+		Assert.assertEquals(regras[1][0], "S0");
+		Assert.assertEquals(regras[regras.length-1][0], "B");
 	}
 	
 	@Test

@@ -9,7 +9,7 @@ public class Leitura {
 	private int [] numeros; //número de [0] variaveis, [1] simbolos terminais, [2] regras de substituicao
 	private String [] variaveis; //[0] eh a variavel inicial
 	private String [] terminais;
-	private String [] regras;
+	private String [][] regras;
 	private String [] cadeias;
 	private Scanner sc;
 
@@ -42,10 +42,12 @@ public class Leitura {
 		sc.nextLine(); //apenas para conseguir ir para a próxima linha
 		
 		//lendo as proximas linhas, que contem as regras de substituicao
-		regras = new String [numeros[2]];
-		for (int i = 0; i < regras.length; i++) {
-			regras[i] = sc.nextLine();
+		String[] regrasAux = new String [numeros[2]];
+		regras = new String [regrasAux.length][4];
+		for (int i = 0; i < regrasAux.length; i++) {
+			regrasAux[i] = sc.nextLine();
 		}
+		tratamentoRegras(regrasAux);
 	}
 	
 	private void leituraCadeia() {
@@ -59,6 +61,12 @@ public class Leitura {
 		}
 	}
 	
+	private void tratamentoRegras (String[] regrasAux) {
+		for (int i = 0; i < regras.length; i++) {
+			regras[i] = regrasAux[i].split(" ");
+		}
+	}
+	
 	public String[] getVariaveis() {
 		return variaveis;
 	}
@@ -67,7 +75,7 @@ public class Leitura {
 		return terminais;
 	}
 	
-	public String[] getRegras() {
+	public String[][] getRegras() {
 		return regras;
 	}
 	
