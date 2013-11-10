@@ -7,6 +7,7 @@ public class glc {
 
 	private static Leitura leitura;
 	private static Tabela[] tabelas;
+	private static String[][] regras;
 	
 	public static void main(String[] args) throws FileNotFoundException {
 		File glc = new File("src/files/inp-glc.txt");
@@ -14,9 +15,10 @@ public class glc {
 		leitura = new Leitura(glc, cadeias);
 		tabelas = new Tabela[leitura.getCadeias().length];
 		criarTabelas();
+		regras = leitura.getRegras();
 		for(int i = 0; i<tabelas.length; i++) cyk(tabelas[i]);
 	}
-	
+
 	public static void criarTabelas() {
 		String[] cadeias = leitura.getCadeias();
 		for (int i = 0; i < cadeias.length; i++) {
@@ -63,7 +65,9 @@ public class glc {
 	}
 
 	public static boolean cadeiaVaziaEhRegra() {
-		
+		for (int i = 0; i < regras.length; i++) {
+			if (("&".equals(regras[i][2]))) return true;
+		}
 		return false;
 	}
 }
