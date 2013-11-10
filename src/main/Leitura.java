@@ -63,31 +63,15 @@ public class Leitura {
 		return variaveis;
 	}
 	
-	public void setVariaveis(String[] variaveis) {
-		this.variaveis = variaveis;
-	}
-	
 	public String[] getTerminais() {
 		return terminais;
-	}
-	
-	public void setTerminais(String[] terminais) {
-		this.terminais = terminais;
 	}
 	
 	public String[] getRegras() {
 		return regras;
 	}
 	
-	public void setRegras(String[] regras) {
-		this.regras = regras;
-	}
-	
 	public String[] getCadeias() {
 		return cadeias;
-	}
-	
-	public void setCadeias(String[] cadeias) {
-		this.cadeias = cadeias;
 	}
 }
