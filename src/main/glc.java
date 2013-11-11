@@ -54,9 +54,14 @@ public class glc {
 		
 	}
 
-	private static String verificaMenorSubcadeia(Tabela tabela, int i) {
-
-		return null;
+	private static String verificaMenorSubcadeia(Tabela tabela, int caracterCadeia) {
+		String resp = "";
+		for (int i = 0; i < regras.length; i++) {
+			if (tabela.tabela[0][caracterCadeia].equals(regras[i][2])) {
+				resp = resp + regras[i][0];
+			}
+		}
+		return resp;
 	}
 
 	public static String verificaSubcadeia(Tabela tabela, int posInicial, int posFinal, int posDivisao) {
