@@ -10,7 +10,17 @@ public class Tabela {
 		this.cadeia = cadeia;
 		tratarCadeia();
 		tabela = new String [this.cadeia.length()+1][this.cadeia.length()+1];
+		
+		preencheTabela();
 		preencheCadeiaNaTabela();
+	}
+
+	private void preencheTabela() {
+		for (int i = 0; i < tabela.length; i++) {
+			for (int j = 0; j < tabela[0].length; j++) {
+				tabela[i][j] = "";
+			}
+		}
 	}
 
 	private void tratarCadeia() {
@@ -22,12 +32,16 @@ public class Tabela {
 			tabela[0][i] = cadeia.charAt(i-1) + "";
 			tabela[i][0] = cadeia.charAt(i-1) + "";
 		}
-		
+	}
+
+	public void imprimeTabela() {
+		System.out.println("Tabela:");
 		for (int i = 0; i < tabela.length; i++) {
 			for (int j = 0; j < tabela.length; j++) {
 				System.out.print(tabela[i][j]+"\t");
 			}
 			System.out.println();
 		}
+		System.out.println("\nAceita: " +aceita+"\n");
 	}
 }

@@ -44,12 +44,13 @@ public class Leitura {
 		//lendo as proximas linhas, que contem as regras de substituicao
 		String[] regrasAux = new String [numeros[2]];
 		regras = new String [regrasAux.length][4];
+		
 		for (int i = 0; i < regrasAux.length; i++) {
 			regrasAux[i] = sc.nextLine();
 		}
 		tratamentoRegras(regrasAux);
 	}
-	
+
 	private void leituraCadeia() {
 		int numCadeias = sc.nextInt();
 		
@@ -63,7 +64,8 @@ public class Leitura {
 	
 	private void tratamentoRegras (String[] regrasAux) {
 		for (int i = 0; i < regras.length; i++) {
-			regras[i] = regrasAux[i].split(" ");
+			String[] aux = regrasAux[i].split(" "); 
+			for (int j = 0; j<aux.length; j++) regras[i][j] = aux[j]; 
 		}
 	}
 	
