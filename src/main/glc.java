@@ -57,7 +57,8 @@ public class glc {
 	}
 
 	private static void verificaAceitacao(Tabela tabela) {
-		
+		if(tabela.tabela[1][tabela.tabela.length-1].contains("S")) tabela.aceita = true;
+		else tabela.aceita = false;
 	}
 
 	private static String verificaMenorSubcadeia(Tabela tabela, int caracterCadeia) {

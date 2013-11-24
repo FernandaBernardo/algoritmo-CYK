@@ -36,11 +36,10 @@ public class Tabela {
 
 	public void imprimeTabela() {
 		System.out.println("Tabela:");
-		for (int i = 0; i < tabela.length; i++) {
-			for (int j = 0; j < tabela.length; j++) {
-				System.out.print(tabela[i][j]+"\t");
+		for (int i = 1; i < tabela.length; i++) {
+			for (int j = i; j < tabela.length; j++) {
+				System.out.println("["+i+","+j+"] " + tabela[i][j]);
 			}
-			System.out.println();
 		}
 		System.out.println("\nAceita: " +aceita+"\n");
 	}
