@@ -2,8 +2,9 @@ package main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class glc {
 
@@ -18,6 +19,7 @@ public class glc {
 		tabelas = new Tabela[leitura.getCadeias().length];
 		criarTabelas();
 		regras = leitura.getRegras();
+		
 		for(int i = 0; i<tabelas.length; i++) {
 			cyk(tabelas[i]);
 			tabelas[i].imprimeTabela();
@@ -41,14 +43,17 @@ public class glc {
 			if (variavel != null) tabela.tabela[i][i] = variavel;
 		}
 		
-		for (int tamanhoSubcadeia = 2; tamanhoSubcadeia < n; tamanhoSubcadeia++) {
+		for (int tamanhoSubcadeia = 2; tamanhoSubcadeia < n+1; tamanhoSubcadeia++) {
 			for (int posInicial = 1; posInicial < n-tamanhoSubcadeia+1; posInicial++) {
 				int posFinal = posInicial + tamanhoSubcadeia -1;
-				System.out.println("POSIÇÃO FINAL: " + posFinal);
 				for (int posDivisao = posInicial; posDivisao < posFinal; posDivisao++) {
-					String variavel = verificaSubcadeia(tabela, posInicial, posFinal, posDivisao);
-					tabela.tabela[posInicial][posFinal] = variavel;
-					System.out.println(posInicial + "  " + posFinal + "  " + posDivisao);
+					Set<String> variavel = verificaSubcadeia(tabela, posInicial, posFinal, posDivisao);
+					String aux = "";
+					Iterator<String> iterator = variavel.iterator();
+					while (iterator.hasNext()) {
+						aux = aux + " " + iterator.next();
+					}
+					tabela.tabela[posInicial][posFinal] = aux;
 				}
 			}
 		}
@@ -70,12 +75,11 @@ public class glc {
 		return resp;
 	}
 
-	public static String verificaSubcadeia(Tabela tabela, int posInicial, int posFinal, int posDivisao) {
-		String resp = "";
+	public static Set<String> verificaSubcadeia(Tabela tabela, int posInicial, int posFinal, int posDivisao) {
+		Set<String> resp = new TreeSet<>();
 		String[] B = (tabela.tabela[posInicial][posDivisao]).split(" ");
 		String[] C = (tabela.tabela[posDivisao+1][posFinal]).split(" ");
 		for (int i = 0; i < regras.length; i++) {
-			
 			for (int b = 0; b<B.length; b++) {
 				for (int c = 0; c<C.length; c++) {
 					String regra = "";
@@ -86,14 +90,10 @@ public class glc {
 					boolean second = regra.contains(C[c]);
 
 					if(first && second) {
-						if("".equals(resp)) resp = regras[i][0];
-						else {
-								resp = resp + " " + regras[i][0];								
-						}
+						resp.add(regras[i][0]);								
 					}
 				}
 			}
-			
 		}
 		return resp;
 	}

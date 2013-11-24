@@ -45,6 +45,12 @@ public class Leitura {
 		String[] regrasAux = new String [numeros[2]];
 		regras = new String [regrasAux.length][4];
 		
+		for (int i = 0; i < regras.length; i++) {
+			for (int j = 0; j < regras[0].length; j++) {
+				regras[i][j] = "";
+			}
+		}
+		
 		for (int i = 0; i < regrasAux.length; i++) {
 			regrasAux[i] = sc.nextLine();
 		}
