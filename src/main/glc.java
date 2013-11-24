@@ -43,17 +43,12 @@ public class glc {
 			if (variavel != null) tabela.tabela[i][i] = variavel;
 		}
 		
-		for (int tamanhoSubcadeia = 2; tamanhoSubcadeia < n+1; tamanhoSubcadeia++) {
+		for (int tamanhoSubcadeia = 2; tamanhoSubcadeia < n; tamanhoSubcadeia++) {
 			for (int posInicial = 1; posInicial < n-tamanhoSubcadeia+1; posInicial++) {
 				int posFinal = posInicial + tamanhoSubcadeia -1;
-				for (int posDivisao = posInicial; posDivisao < posFinal; posDivisao++) {
-					Set<String> variavel = verificaSubcadeia(tabela, posInicial, posFinal, posDivisao);
-					String aux = "";
-					Iterator<String> iterator = variavel.iterator();
-					while (iterator.hasNext()) {
-						aux = aux + " " + iterator.next();
-					}
-					tabela.tabela[posInicial][posFinal] = aux;
+				for (int posDivisao = posInicial; posDivisao < posFinal	; posDivisao++) {
+					String variavel = verificaSubcadeia(tabela, posInicial, posFinal, posDivisao);
+					tabela.tabela[posInicial][posFinal] +=" " + variavel;
 				}
 			}
 		}
@@ -75,26 +70,19 @@ public class glc {
 		return resp;
 	}
 
-	public static Set<String> verificaSubcadeia(Tabela tabela, int posInicial, int posFinal, int posDivisao) {
-		Set<String> resp = new TreeSet<>();
-		String[] B = (tabela.tabela[posInicial][posDivisao]).split(" ");
-		String[] C = (tabela.tabela[posDivisao+1][posFinal]).split(" ");
+	public static String verificaSubcadeia(Tabela tabela, int posInicial, int posFinal, int posDivisao) {
+		String resp = "";
 		for (int i = 0; i < regras.length; i++) {
-			for (int b = 0; b<B.length; b++) {
-				for (int c = 0; c<C.length; c++) {
-					String regra = "";
-					for (int x = 2; x<4; x++) {
-						regra = regra + "" +regras[i][x];
-					}
-					boolean first = regra.contains(B[b]);
-					boolean second = regra.contains(C[c]);
+			String b = regras[i][2];
+			String c = regras[i][3];
 
-					if(first && second) {
-						resp.add(regras[i][0]);								
-					}
-				}
+			boolean first = tabela.tabela[posInicial][posDivisao].contains(b);
+			boolean second = tabela.tabela[posDivisao+1][posFinal].contains(c);
+			if(first && second) {
+				resp = resp + " " + regras[i][0];
 			}
 		}
+		
 		return resp;
 	}
 
