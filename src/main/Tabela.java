@@ -34,7 +34,7 @@ public class Tabela {
 		}
 	}
 
-	public void imprimeTabela() {
+/*	public void imprimeTabela() {
 		System.out.println("Tabela:");
 		for (int i = 1; i < tabela.length; i++) {
 			for (int j = i; j < tabela.length; j++) {
@@ -42,5 +42,5 @@ public class Tabela {
 			}
 		}
 		System.out.println("\nAceita: " +aceita+"\n");
-	}
+	}*/
 }
