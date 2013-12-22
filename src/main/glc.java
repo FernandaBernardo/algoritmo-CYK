@@ -1,3 +1,8 @@
+/*
+ * Fernanda Moraes Bernardo - 7971991
+ * Barbara Carvalho Campacci - 7972672
+*/ 
+
 package main;
 
 import java.io.File;
@@ -14,15 +19,17 @@ public class glc {
 	public static void main(String[] args) throws FileNotFoundException {
 		File glc = new File("src/files/inp-glc.txt");
 		File cadeias = new File("src/files/inp-cadeias.txt");
-		leitura = new Leitura(glc, cadeias);
-		tabelas = new Tabela[leitura.getCadeias().length];
+		leitura = new Leitura(glc, cadeias); //le arquivos para pegar as informações
+		tabelas = new Tabela[leitura.getCadeias().length]; //monta a tabela com as informações necessárias
 		criarTabelas();
-		regras = leitura.getRegras();
+		regras = leitura.getRegras(); //pega as regras que fizemos a leitura do arquivo
 		
+		//para cada uma das cadeias, monte a tabela
 		for(int i = 0; i<tabelas.length; i++) {
 			cyk(tabelas[i]);
 		}
 		
+		//escrever no arquivo o status e a tabela
 		escreveStatus();
 		escreveTabela();
 	}
@@ -34,16 +41,15 @@ public class glc {
 		
 		for (int k = 0; k < tabelas.length; k++) {
 			System.out.println(tabelas[k].cadeia.replace("", " ").replaceFirst(" ", ""));
-			for (int i = 1; i < tabelas[k].tabela.length; i++) {
-				for (int j = i; j < tabelas[k].tabela.length; j++) {
-					String aux = tabelas[k].tabela[i][j];
-					if ("".equals(aux)) System.out.println("*");
-					else System.out.println(aux.replaceFirst(" ", ""));
+			if(!"&".equals(tabelas[k].cadeia)) { 
+				for (int i = 1; i < tabelas[k].tabela.length; i++) {
+					for (int j = i; j < tabelas[k].tabela.length; j++) {
+						String aux = tabelas[k].tabela[i][j];
+						System.out.println(i + " " + j + " " + aux.replaceFirst(" ", ""));
+					}
 				}
 			}
 		}
-		
-		
 	}
 	
 	private static void escreveStatus() throws FileNotFoundException {
@@ -54,6 +60,7 @@ public class glc {
 		}
 	}
 	
+	//cria as tabelas para todas as cadeias de entrada
 	public static void criarTabelas() {
 		String[] cadeias = leitura.getCadeias();
 		for (int i = 0; i < cadeias.length; i++) {
@@ -62,16 +69,22 @@ public class glc {
 	}
 	
 	public static void cyk (Tabela tabela) {
-		if ("&".equals(tabela.cadeia) && cadeiaVaziaEhRegra()) tabela.aceita = true;
+		//se a cadeia for vazia e ela estiver nas regras, aceite
+		if ("&".equals(tabela.cadeia) && cadeiaVaziaEhRegra()) {
+			tabela.aceita = true;
+			return;
+		}
 		
 		int n = tabela.tabela.length;
 		
+		//preenche a diagonal principal da tabela
 		for (int i = 1; i < n; i++) {
 			String variavel = verificaMenorSubcadeia(tabela, i);
 			if (variavel != null) tabela.tabela[i][i] = variavel;
 		}
 		
-		for (int tamanhoSubcadeia = 2; tamanhoSubcadeia < n; tamanhoSubcadeia++) {
+		//preenche o restante da tabela
+		for (int tamanhoSubcadeia = 2; tamanhoSubcadeia < n; tamanhoSubcadeia++) { 
 			for (int posInicial = 1; posInicial < n-tamanhoSubcadeia+1; posInicial++) {
 				int posFinal = posInicial + tamanhoSubcadeia -1;
 				for (int posDivisao = posInicial; posDivisao < posFinal	; posDivisao++) {
@@ -82,12 +95,12 @@ public class glc {
 				}
 			}
 		}
-		
 		verificaAceitacao(tabela);
 	}
 	
+	//verifica se a regra aceita a cadeia
 	private static void verificaAceitacao(Tabela tabela) {
-		if(tabela.tabela[1][tabela.tabela.length-1].contains("S0")) tabela.aceita = true;
+		if(tabela.tabela[1][tabela.tabela.length-1].contains(regras[0][0])) tabela.aceita = true;
 		else tabela.aceita = false;
 	}
 	
@@ -95,7 +108,7 @@ public class glc {
 		String resp = "";
 		for (int i = 0; i < regras.length; i++) {
 			if (tabela.tabela[0][caracterCadeia].equals(regras[i][2])) {
-				resp = resp + regras[i][0];
+				resp = resp + " " + regras[i][0];
 			}
 		}
 		return resp;
@@ -113,7 +126,6 @@ public class glc {
 				resp = resp + " " + regras[i][0];
 			}
 		}
-		
 		return resp;
 	}
 	

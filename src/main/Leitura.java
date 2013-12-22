@@ -20,6 +20,7 @@ public class Leitura {
 		leituraCadeia();
 	}
 
+	//Lê a especificação das regras
 	public void leituraEspec () {
 		//lendo primeira linha do arquivo
 		numeros = new int [3];
@@ -68,6 +69,7 @@ public class Leitura {
 		}
 	}
 	
+	//coloca as regras no formato certo, no arranjo de regras (sem ser no auxiliar)	
 	private void tratamentoRegras (String[] regrasAux) {
 		for (int i = 0; i < regras.length; i++) {
 			String[] aux = regrasAux[i].split(" "); 
